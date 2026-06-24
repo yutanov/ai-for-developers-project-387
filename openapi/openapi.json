@@ -492,6 +492,7 @@
           "id",
           "eventTypeId",
           "guestName",
+          "guestEmail",
           "startTime",
           "endTime",
           "status",
@@ -541,6 +542,7 @@
         "required": [
           "eventTypeId",
           "guestName",
+          "guestEmail",
           "startTime"
         ],
         "properties": {

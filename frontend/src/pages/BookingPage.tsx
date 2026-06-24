@@ -28,7 +28,7 @@ export default function BookingPage() {
 
   const createBooking = useCreateBooking()
 
-  const handleConfirmBooking = async (guestName: string, guestEmail?: string) => {
+  const handleConfirmBooking = async (guestName: string, guestEmail: string) => {
     if (!selectedSlot) return
     await createBooking.mutateAsync({
       eventTypeId: id,

@@ -110,7 +110,7 @@ export interface components {
             /** Format: int64 */
             eventTypeId: number;
             guestName: string;
-            guestEmail?: string;
+            guestEmail: string;
             /** Format: date-time */
             startTime: string;
             /** Format: date-time */
@@ -125,7 +125,7 @@ export interface components {
             /** Format: int64 */
             eventTypeId: number;
             guestName: string;
-            guestEmail?: string;
+            guestEmail: string;
             /** Format: date-time */
             startTime: string;
         };
