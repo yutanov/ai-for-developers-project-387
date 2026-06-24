@@ -61,12 +61,14 @@ jobs:
         uses: anomalyco/opencode/github@latest
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           model: opencode/deepseek-v4-flash-free
+          use_github_token: true
           prompt: |
             Проанализируй Lighthouse отчет в ./lighthouse-report/.
             Выдели:
             - Текущие scores по категориям (Performance, Accessibility, Best Practices, SEO)
             - Ключевые проблемы и возможности улучшения
             - Сравнение с предыдущими показателями (если есть)
-            Создай issue в GitHub с кратким summary и рекомендациями для команды.
+            Используя gh CLI, создай issue в GitHub с кратким summary и рекомендациями для команды.
