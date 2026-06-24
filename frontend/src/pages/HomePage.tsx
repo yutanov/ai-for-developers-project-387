@@ -46,21 +46,21 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 py-16 sm:grid-cols-3">
           <div className="flex flex-col items-center text-center">
             <CalendarDays className="mb-4 h-10 w-10 text-primary" />
-            <h3 className="mb-2 font-semibold">Выбор даты</h3>
+            <h2 className="mb-2 font-semibold">Выбор даты</h2>
             <p className="text-sm text-muted-foreground">
               Просматривайте свободные слоты в ближайшие 14 дней
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <Clock className="mb-4 h-10 w-10 text-primary" />
-            <h3 className="mb-2 font-semibold">Удобное время</h3>
+            <h2 className="mb-2 font-semibold">Удобное время</h2>
             <p className="text-sm text-muted-foreground">
               Выбирайте подходящие 30-минутные интервалы
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
             <Users className="mb-4 h-10 w-10 text-primary" />
-            <h3 className="mb-2 font-semibold">Мгновенная запись</h3>
+            <h2 className="mb-2 font-semibold">Мгновенная запись</h2>
             <p className="text-sm text-muted-foreground">
               Заполните имя и email — бронь подтверждена
             </p>
