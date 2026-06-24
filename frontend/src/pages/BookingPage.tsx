@@ -51,6 +51,7 @@ export default function BookingPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
+      <h1 className="sr-only">{eventType.title} — запись на звонок</h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div className="md:col-span-1">
           <Card>

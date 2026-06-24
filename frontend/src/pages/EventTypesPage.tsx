@@ -29,7 +29,7 @@ export default function EventTypesPage() {
         </div>
       </div>
 
-      <h2 className="mb-1 text-2xl font-semibold">Выберите тип события</h2>
+      <h1 className="mb-1 text-2xl font-semibold">Выберите тип события</h1>
       <p className="mb-8 text-sm text-muted-foreground">
         Нажмите на карточку, чтобы открыть календарь и выбрать свободное время
       </p>
