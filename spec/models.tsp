@@ -16,7 +16,7 @@ model Booking {
   id: int64;
   eventTypeId: int64;
   guestName: string;
-  guestEmail?: string;
+  guestEmail: string;
   startTime: utcDateTime;
   endTime: utcDateTime;
   status: BookingStatus;
@@ -43,7 +43,7 @@ model UpdateEventTypeRequest {
 model CreateBookingRequest {
   eventTypeId: int64;
   guestName: string;
-  guestEmail?: string;
+  guestEmail: string;
   startTime: utcDateTime;
 }
 

@@ -116,6 +116,7 @@ class TestSlots:
             json={
                 "eventTypeId": et_id,
                 "guestName": "Alice",
+                "guestEmail": "alice@example.com",
                 "startTime": first_slot["startTime"],
             },
         )
@@ -153,6 +154,7 @@ class TestBookings:
             json={
                 "eventTypeId": 999,
                 "guestName": "Bob",
+                "guestEmail": "bob@example.com",
                 "startTime": future.isoformat(),
             },
         )
@@ -167,6 +169,7 @@ class TestBookings:
             json={
                 "eventTypeId": et_id,
                 "guestName": "Alice",
+                "guestEmail": "alice@example.com",
                 "startTime": future.isoformat(),
             },
         )
@@ -177,6 +180,7 @@ class TestBookings:
             json={
                 "eventTypeId": et_id,
                 "guestName": "Bob",
+                "guestEmail": "bob@example.com",
                 "startTime": future.isoformat(),
             },
         )
@@ -189,7 +193,7 @@ class TestBookings:
         future = (datetime.now() + timedelta(days=1)).replace(hour=11, minute=0, second=0, microsecond=0)
         client.post(
             "/api/bookings",
-            json={"eventTypeId": et_id, "guestName": "Charlie", "startTime": future.isoformat()},
+            json={"eventTypeId": et_id, "guestName": "Charlie", "guestEmail": "charlie@example.com", "startTime": future.isoformat()},
         )
         resp = client.get("/api/admin/bookings")
         assert resp.status_code == 200

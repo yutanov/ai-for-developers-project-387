@@ -38,7 +38,7 @@ class Booking(BaseModel):
     id: int
     eventTypeId: int
     guestName: str
-    guestEmail: Optional[str] = None
+    guestEmail: str
     startTime: datetime
     endTime: datetime
     status: BookingStatus
@@ -48,7 +48,7 @@ class Booking(BaseModel):
 class CreateBookingRequest(BaseModel):
     eventTypeId: int
     guestName: str
-    guestEmail: Optional[str] = None
+    guestEmail: str
     startTime: datetime
 
 

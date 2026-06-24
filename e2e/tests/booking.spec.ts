@@ -111,7 +111,7 @@ test.describe('Booking E2E', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-    }, { eventTypeId: eventType.id, guestName: 'Alice', startTime: slotStartTime })
+    }, { eventTypeId: eventType.id, guestName: 'Alice', guestEmail: 'alice@example.com', startTime: slotStartTime })
 
     await page.waitForTimeout(1000)
 
@@ -121,7 +121,7 @@ test.describe('Booking E2E', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-    }, { eventTypeId: eventType.id, guestName: 'Bob', startTime: slotStartTime })
+    }, { eventTypeId: eventType.id, guestName: 'Bob', guestEmail: 'bob@example.com', startTime: slotStartTime })
 
     await page.waitForTimeout(1000)
 
@@ -153,6 +153,7 @@ test.describe('Booking E2E', () => {
 
     await page.waitForSelector('#guestName', { timeout: 5000 })
     await page.fill('#guestName', '')
+    await page.fill('#guestEmail', 'test@example.com')
 
     await page.getByRole('button', { name: 'Подтвердить' }).click()
 

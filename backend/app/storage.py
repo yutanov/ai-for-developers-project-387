@@ -62,7 +62,7 @@ class InMemoryStorage:
         self,
         event_type_id: int,
         guest_name: str,
-        guest_email: Optional[str],
+        guest_email: str,
         start_time: datetime,
         end_time: datetime,
     ) -> Booking:

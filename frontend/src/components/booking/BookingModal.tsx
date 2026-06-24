@@ -15,7 +15,7 @@ import { Label } from '@/components/ui/label'
 
 const formSchema = z.object({
   guestName: z.string().min(1, 'Имя обязательно'),
-  guestEmail: z.string().email('Некорректный email').optional().or(z.literal('')),
+  guestEmail: z.string().email('Некорректный email'),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -23,7 +23,7 @@ type FormValues = z.infer<typeof formSchema>
 interface BookingModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  onConfirm: (guestName: string, guestEmail?: string) => void
+  onConfirm: (guestName: string, guestEmail: string) => void
   isPending: boolean
 }
 
@@ -39,7 +39,7 @@ export function BookingModal({ open, onOpenChange, onConfirm, isPending }: Booki
   })
 
   const onSubmit = (values: FormValues) => {
-    onConfirm(values.guestName, values.guestEmail || undefined)
+    onConfirm(values.guestName, values.guestEmail)
   }
 
   return (
@@ -67,7 +67,7 @@ export function BookingModal({ open, onOpenChange, onConfirm, isPending }: Booki
               )}
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="guestEmail">Email</Label>
+              <Label htmlFor="guestEmail">Email *</Label>
               <Input id="guestEmail" type="email" placeholder="your@email.com" {...register('guestEmail')} />
               {errors.guestEmail && (
                 <p className="text-sm text-destructive">{errors.guestEmail.message}</p>

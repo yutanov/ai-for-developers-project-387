@@ -45,7 +45,7 @@ export default function AdminBookingsPage() {
           <TableRow>
             <TableHead className="w-16">ID</TableHead>
             <TableHead>Гость</TableHead>
-            <TableHead className="hidden md:table-cell">Email</TableHead>
+            <TableHead>Email</TableHead>
             <TableHead className="hidden md:table-cell">Тип события</TableHead>
             <TableHead>Начало</TableHead>
             <TableHead>Конец</TableHead>
@@ -57,8 +57,8 @@ export default function AdminBookingsPage() {
             <TableRow key={booking.id}>
               <TableCell className="font-mono text-xs">{booking.id}</TableCell>
               <TableCell className="font-medium">{booking.guestName}</TableCell>
-              <TableCell className="hidden md:table-cell text-muted-foreground">
-                {booking.guestEmail || '—'}
+              <TableCell className="text-muted-foreground">
+                {booking.guestEmail}
               </TableCell>
               <TableCell className="hidden md:table-cell">{booking.eventTypeId}</TableCell>
               <TableCell className="text-sm">
