@@ -1,0 +1,72 @@
+name: Lighthouse Audit
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Lighthouse CLI
+        run: npm install -g lighthouse
+
+      - name: Run Lighthouse audit
+        run: |
+          mkdir -p ./lighthouse-report
+          lighthouse https://ai-for-developers-project-387-sges.onrender.com \
+            --output html --output json \
+            --output-path ./lighthouse-report/report \
+            --chrome-flags="--headless --no-sandbox"
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: ./lighthouse-report/
+
+  analyze:
+    needs: audit
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Download Lighthouse report
+        uses: actions/download-artifact@v4
+        with:
+          name: lighthouse-report
+          path: ./lighthouse-report/
+
+      - name: Run OpenCode analysis
+        uses: anomalyco/opencode/github@latest
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        with:
+          model: opencode/deepseek-v4-flash-free
+          prompt: |
+            Проанализируй Lighthouse отчет в ./lighthouse-report/.
+            Выдели:
+            - Текущие scores по категориям (Performance, Accessibility, Best Practices, SEO)
+            - Ключевые проблемы и возможности улучшения
+            - Сравнение с предыдущими показателями (если есть)
+            Создай issue в GitHub с кратким summary и рекомендациями для команды.
