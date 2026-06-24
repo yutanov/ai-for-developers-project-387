@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: calendar-booking-387
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
