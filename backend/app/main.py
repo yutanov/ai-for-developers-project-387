@@ -5,8 +5,9 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.staticfiles import StaticFiles
+from starlette.types import Scope
 
 from app.models import ErrorBody
 from app.routers import admin, public, slots, bookings
@@ -58,6 +59,20 @@ app.include_router(public.router)
 app.include_router(slots.router)
 app.include_router(bookings.router)
 
+class CachedStaticFiles(StaticFiles):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.cache_max_age = 60 * 60 * 24 * 365  # 1 year for hashed assets
+
+    async def get_response(self, path: str, scope: Scope):
+        response = await super().get_response(path, scope)
+        if response.status_code == 200:
+            if any(ext in path for ext in ('.js', '.css', '.png', '.jpg', '.svg', '.ico', '.woff2')):
+                response.headers['Cache-Control'] = f'public, max-age={self.cache_max_age}, immutable'
+            else:
+                response.headers['Cache-Control'] = 'no-cache'
+        return response
+
 frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 if frontend_dist.exists():
-    app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
+    app.mount("/", CachedStaticFiles(directory=str(frontend_dist), html=True), name="frontend")
